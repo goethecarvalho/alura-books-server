@@ -1,8 +1,9 @@
 const fs = require("fs")
+const { getTodosLivros, getLivroPorId } = require("../servicos/livro")
 
 function getLivros(req, res) {
     try {
-        const livros = 
+        const livros = getTodosLivros()
         res.send(livros)
     } catch (error) {
         res.status(500)
@@ -10,6 +11,18 @@ function getLivros(req, res) {
     } 
 }
 
+function getLivro(req, res) {
+    try {
+        req.params.id
+        const livro = getLivroPorId(id)
+        res.send(livro)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    } 
+}
+
 module.exports = {
-    getLivros
+    getLivros,
+    getLivro
 }
